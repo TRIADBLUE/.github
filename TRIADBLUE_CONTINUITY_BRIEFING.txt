@@ -1,0 +1,336 @@
+CLAUDE CONTINUITY BRIEFING
+TRIADBLUE ECOSYSTEM
+Updated March 24, 2026 — Read this ENTIRE document before responding if you have no memory of previous conversations.
+
+═══════════════════════════════════════
+1. WHO IS DEAN
+═══════════════════════════════════════
+
+Dean Laskowski is the founder of TriadBlue, Inc. — a technology company building an ecosystem of cloud-based business platforms for small and local businesses. He is a non-coder building production software using Claude Code (terminal agent) and Claude web chat (for planning, review, and prompt writing). He is direct, moves fast, and does not tolerate filler or placeholder work. Everything must be production-ready.
+
+Local machine: Mac Mini. Username: deanlewis. Path: /Users/deanlewis/
+He travels between NYC and Connecticut. He manages all development independently with exacting standards for customer experience.
+His experience spans more than two decades of success across channels and mediums. He is the smartest person in the room regarding his business. Never assume. Ask. Never presume to make business decisions for him.
+
+═══════════════════════════════════════
+2. THE TRIADBLUE ECOSYSTEM
+═══════════════════════════════════════
+
+Platform        URL                   What it does                                        Status
+hostsblue       hostsblue.com         Domains, hosting, email, website builder, SSL        Active build — 90%
+BUILDERBLUE2    BUILDERBLUE2.COM      AI-powered vibe coding platform. Standalone + integrates with hostsblue.com.
+swipesblue      swipesblue.com        Proprietary payment processing, checkout, cart       Built, deployed — 90%
+businessblueprint businessblueprint.io Business growth / local SEO platform with apps      90% complete
+scansblue       scansblue.com         Website auditing / assessment tool                   Earlier stage
+consoleblue     console.blue          Internal project management, GitHub gateway           35% complete
+triadblue       triadblue.com         Ecosystem hub / parent company dashboard             Built
+LINKBlue        linkblue.systems      Monitors all website health                          Active
+
+═══════════════════════════════════════
+3. HOW TO ACCESS DEAN'S CODE
+═══════════════════════════════════════
+
+Claude Code: use it directly — no proxy server, no MCP server, no pasted URLs required.
+
+Claude Web Chat: use the LINKBlue GitHub proxy at https://linkblue-githubproxy.up.railway.app
+
+Available endpoints:
+  /api/github/repos — list all repos
+  /api/github/files?repo=businessblueprint&path=src — list files in a directory
+  /api/github/file?repo=businessblueprint&path=src/index.js — read a file
+  /api/github/commits?repo=businessblueprint — recent commits
+  /api/github/branches?repo=businessblueprint — list branches
+
+GitHub org: TRIADBLUE (github.com/TRIADBLUE)
+Repos: hostsblue, triadblue, swipesblue, businessblueprint, scanslab, mealpreppro. consoleblue is on Replit.
+
+═══════════════════════════════════════
+4. SWIPESBLUE — PAYMENT GATEWAY
+═══════════════════════════════════════
+
+ALL payment processing across every TriadBlue platform goes exclusively through swipesblue. No Stripe. No third-party gateways. Ever. What processor swipesblue uses on its backend is swipesblue's business alone — no other platform needs to know or reference it.
+
+Phases complete: Phase 1 Merchant Management API, Phase 2 Payment Processing API, Phase 3 Webhooks & Event System, Phase 4 Admin UI.
+
+businessblueprint.io calls the SwipesBlue API for all checkout and subscription management. The word Stripe must never appear in the businessblueprint codebase. Stripe was temporarily introduced incorrectly and a full removal prompt was written and run on March 24, 2026.
+
+═══════════════════════════════════════
+5. BUSINESSBLUEPRINT.IO — THE APP PLATFORM
+═══════════════════════════════════════
+
+90% complete as of March 2026. The customer journey:
+
+  / assess — Proprietary scan tool + Google Business Intelligence
+  AI Prescription — Recommends which apps the business needs
+  App Purchase — Customer buys through businessblueprint.io marketplace via SwipesBlue
+  Dashboard — All purchased apps visible with setup progress tracking
+  / connect CRM — Central hub where all app data flows in and out
+
+SUITE STRUCTURE — suites never cross-pollinate, do not share apps, never join:
+
+Compass Suite — $99/mo (formerly CommVerse)
+  / promote — Email campaigns (#1844A6)
+  / engage — LiveChat widget (#660099)
+  / respond — Unified multi-channel inbox (#001882)
+  / post — Social media management (#FF44CC)
+
+Anchor Suite — $99/mo (formerly LocalBlue)
+  / elevate — Review aggregation, response automation (#E9B307)
+  / optimize — SEO health monitoring, keyword rankings (#374151)
+  / publish — Directory/listings management for local SEO (#064A6C)
+  / amplify — Advertising platform, dual-base Meta + Google + Reddit (#6EA6FF)
+
+/ connect CRM — Always standalone, NEVER bundled
+  FREE Starter: 100 contacts, 1 user, basic features
+  $29/mo Performance (Unlimited): unlimited contacts, unlimited users, full CRM
+  NEVER discounted. NEVER part of any suite.
+
+Each app is $29/mo standalone if purchased outside a suite.
+
+Coach Blue — Purchasable AI business coach
+  $99/mo standalone
+  $59/mo with one suite active (Compass or Anchor)
+  FREE with both suites active (Compass + Anchor)
+
+═══════════════════════════════════════
+6. APP NAMES, COLORS & ICONS — BRAND LAW
+═══════════════════════════════════════
+
+Format: / (Triad Black #09080E) + space + appname (app's own accent color)
+Font: Archivo Semi Expanded, 15px uniform
+The "/" is ALWAYS present. The space is ALWAYS present.
+All colors confirmed from official lockup files — lockup files supersede all previous documents.
+
+App             Hex Color   Suite       Formerly
+/ promote       #1844A6     Compass     /send
+/ engage        #660099     Compass     /chat
+/ respond       #001882     Compass     /inbox
+/ post          #FF44CC     Compass     /content
+/ elevate       #E9B307     Anchor      /reputation
+/ optimize      #374151     Anchor      (new)
+/ publish       #064A6C     Anchor      /listings
+/ amplify       #6EA6FF     Anchor      (new)
+/ connect       #008060     Standalone  /relationships
+/ assess        #960D71     ScansBlue tool (new)
+/ scan          #E00420     ScansBlue tool
+Coach Blue      #0000FF     Purchasable AI coach
+Compass Suite   #F97316     Suite brand
+Anchor Suite    #6EA6FF     Suite brand
+
+ZERO-TOLERANCE BRAND RULES:
+  No "Coming Soon" anywhere — features must be functional or not exist yet
+  No placeholder work, stubs, or demo data labeled as real
+  Pure Blue #0000FF is NEVER used in UI — logo images only
+  App icons: Lucide React icons used across all apps for launch
+  EXCEPTION: Coach Blue uses his face icon (PNG) — never replace with Lucide
+  Coach Blue face icon files: coachblue.png, coachblue256.png, coachblue48.png, coachblue24.png
+  All stored at: attached_assets/brand/
+  Wordmark PNG files are reference only — never displayed on site
+
+BUTTON RULES (locked from landing page audit):
+  Button 1: Orange #FF6B00, white text — always "Add to Cart — $X/mo"
+  Button 2: App's own accent color, WHITE text always (exception: / elevate uses Triad Black #09080E because #E9B307 fails contrast with white)
+  Button 3: Outline, app accent color border and text — "View All Pricing"
+
+DARK BAND RULE: White text ONLY on any dark background section. No app colors in dark bands. No exceptions.
+
+SUBTITLE BELOW APP NAME: In the hero of each landing page, below the app name, render the app's description in the app's own color. Small, spaced caps. Comes from app-registry description field.
+
+═══════════════════════════════════════
+7. NAMING CONVENTIONS
+═══════════════════════════════════════
+
+  Dashboard = customer-facing area (what clients see when logged in) — for VIEWING
+  Panel = admin area (what Dean uses to manage the platform) — for EXECUTING
+  Console = internal operations interface (ConsoleBlue) — for EXECUTING
+  Dashboards are for viewing. Consoles and panels are for executing.
+
+Platform Casing Rules:
+  All lowercase always: hostsblue, swipesblue, consoleblue, businessblueprint, scansblue
+  All lowercase with TLD: hostsblue.com, swipesblue.com, businessblueprint.io, scansblue.com
+  ONLY exception: TRIADBLUE (parent company) is ALWAYS all caps — TRIADBLUE.COM
+  ConsoleBlue is internal ops interface — cased as shown, not customer-facing
+  swipesblue is always lowercase in all interfaces
+
+═══════════════════════════════════════
+8. COACH BLUE — AI BUSINESS COACH
+═══════════════════════════════════════
+
+Coach Blue is a purchasable AI business coach AND a persistent guide built into businessblueprint.io.
+
+PRICING:
+  $99/mo standalone
+  $59/mo with one suite (Compass or Anchor)
+  FREE with both suites active
+
+PHYSICAL PLACEMENT:
+  Persistent right sidebar on every authenticated page
+  Never on login, signup, or public pages
+  Collapsed 48px strip by default
+  Expands to 320px panel
+  Mobile: floating button opens full-screen overlay
+
+FOUR MODES:
+  Guided — step-by-step setup wizard, triggers on first open of any app
+  Advisory — proactive insights based on data, runs every 30 minutes
+  Responsive — full conversational AI, triggers when client types anything
+  Alert — urgent flags, fires immediately for critical events
+
+SETUP CADENCE ORDER (Coach Blue always follows this sequence):
+  1. / connect — foundation of everything
+  2. / publish — lock in business identity online
+  3. / elevate — surface and manage reviews
+  4. / respond — unify all incoming messages
+  5. / engage — activate chat widget on client website
+  6. / post — build social presence
+  7. / promote — email campaigns
+  8. / amplify — paid advertising
+
+ICON SIZES:
+  coachblue.png — full icon, marketing/splash contexts
+  coachblue256.png — 256px, expanded sidebar header and onboarding welcome
+  coachblue48.png — 48px, collapsed sidebar strip and modal headers
+  coachblue24.png — 24px, chat message bubbles
+  Location: attached_assets/brand/
+  Registry import: @assets/brand/coachblue.png
+
+MILESTONE SYSTEM: Coach Blue celebrates app completions, first contacts, first campaigns, first reviews responded to, first / engage conversation, ScansBlue score improvements.
+
+90-DAY RESCAN ADVISORY: At 90 days since last scan, Coach Blue prompts client to re-run ScansBlue and compares scores.
+
+═══════════════════════════════════════
+9. / AMPLIFY — ADVERTISING APP (ANCHOR SUITE)
+═══════════════════════════════════════
+
+Dual-base architecture — Meta and Google have fundamentally different ad structures.
+
+META BASE: Facebook, Instagram, Threads, WhatsApp — Meta Ads Manager API
+GOOGLE/SEARCH BASE: Google Search, Display, YouTube, Maps, Gmail — Google Ads API + Microsoft Ads API
+REDDIT: Priority platform with dedicated tab, wizard, and sentiment monitoring system
+PHASE 2 (stubs only at launch): TikTok, LinkedIn, Snapchat, Pinterest
+
+KEY DIFFERENTIATORS:
+  Unified cross-platform budget controller — shift spend between platforms in real time
+  AI creative from / connect CRM data
+  / publish listing hours auto-sync into ad scheduling — ads pause when business is closed
+  ScansBlue score drives platform recommendations
+  / elevate review data auto-feeds into ad copy social proof
+  / engage chat volume informs ad timing recommendations
+
+REDDIT IS PRIORITY:
+  Reddit Ads API v3 (base URL: https://ads-api.reddit.com/api/v3)
+  Dedicated tab with: Subreddit Intelligence Scan, Sentiment Monitoring, Comment Engagement Assistant
+  Sentiment check runs every 12 hours — alerts client if score drops below 30
+  Comment Engagement Assistant: surfaces ad comments, drafts AI responses, client replies from inside / amplify
+  Reddit creative must follow Reddit culture: value-first, never corporate-speak
+
+Full Claude Code prompt written and saved at: /mnt/user-data/outputs/amplify_complete_prompt.txt
+
+═══════════════════════════════════════
+10. HOW IT WORKS — THREE VERSIONS
+═══════════════════════════════════════
+
+Expanded from 5 steps to 6 steps. Three versions written and prompts delivered to Claude Code:
+
+6 STEPS:
+  1. Scan Your Digital Presence (/ assess — free)
+  2. Get Your Custom Blueprint (AI prescription)
+  3. Build Your Foundation (/ connect CRM)
+  4. Own Your Local Presence (/ anchor suite — Google Business, D&B DUNS, directories, reviews, SEO, advertising)
+  5. Activate Your Communications (/ compass suite — email, chat, inbox, social)
+  6. Never Grow Alone (Coach Blue)
+
+THREE VERSIONS:
+  Menu dropdown — 3-4 words per step, plants ideas
+  Homepage CTA — expanded, mentions Google Business and D&B by name
+  Full page (journey.tsx) — comprehensive with integration callouts between each step
+
+═══════════════════════════════════════
+11. APP ICONS — CURRENT STATE
+═══════════════════════════════════════
+
+As of March 24, 2026, all app icons replaced with Lucide React icons for launch.
+Custom icons will be restored post-launch in one targeted pass.
+
+Icon assignments (Lucide):
+  / promote — Mail
+  / respond — Inbox
+  / engage — MessageCircle
+  / post — Share2
+  / publish — BookOpen
+  / elevate — Star
+  / optimize — Target
+  / amplify — Megaphone
+  / connect — Users
+  / assess — Lightbulb
+  / scan — ScanLine
+  Anchor Suite — Anchor
+  Compass Suite — Compass
+  Coach Blue — EXCEPTION: uses face PNG (coachblue.png) — never Lucide
+
+AppName component updated: renders Lucide icon in rounded square using app's accent color with white icon inside.
+
+═══════════════════════════════════════
+12. TECHNICAL STACK — BUSINESSBLUEPRINT.IO
+═══════════════════════════════════════
+
+  Frontend: React + TypeScript + Tailwind + shadcn/ui
+  Backend: Node.js + Express + Drizzle ORM + PostgreSQL
+  Auth: Replit Auth + magic link passwordless login
+  Database schema: 3,318+ lines, 45+ tables
+  app-registry.ts — single source of truth for all pricing, colors, app configuration
+  menu-config.ts — single source of truth for all navigation structure
+  AppName component — renders app icon + / + appname + subtitle below in app color
+  Lucide icons installed and in use
+
+═══════════════════════════════════════
+13. WHAT TO DO WHEN YOU FIRST LOAD
+═══════════════════════════════════════
+
+  1. Read this entire document first
+  2. Check memory edits for the latest state
+  3. If Dean references past work, use conversation_search or recent_chats BEFORE asking him to re-explain
+  4. If you need to read code, use the LINKBlue GitHub proxy
+  5. Check /mnt/transcripts/ for full conversation history — read journal.txt first
+  6. Never ask Dean to re-explain things — search first
+  7. If Dean says something contradicts what you think you know, HE IS RIGHT
+  8. Never make architecture, business, or product decisions without explicit direction from Dean
+
+═══════════════════════════════════════
+14. STRATEGIC COMMITMENTS — LOCKED
+═══════════════════════════════════════
+
+  ALL payment processing goes through swipesblue. No Stripe. No third-party gateways. Ever.
+  / connect CRM is the single source of truth for all apps
+  businessblueprint.io is the priority for revenue generation
+  Suites never cross-pollinate — Compass and Anchor are independent
+  Coach Blue is purchasable ($99/$59/FREE based on suite ownership) AND always present for all clients
+  ConsoleBlue is the internal nervous system — not customer-facing
+  The Expand tier uses containerized VPS — never say "dedicated"
+  hostsblue.com subscription tiers: Begin $15/mo, Build $29/mo, Scale $99/mo, Expand $320/mo
+  Cloudflare Agency Program application submitted — building in mock mode until credentials arrive
+  Lockup files are the final authority on all colors — they supersede all previous documents
+
+═══════════════════════════════════════
+15. PROMPTS STATUS — MARCH 24, 2026
+═══════════════════════════════════════
+
+COMPLETED AND RUN:
+  Stripe removal + SwipesBlue restoration
+  App distribution system
+  Coach Blue full build
+  / publish full build
+  Generic icon replacement (Lucide) across all apps except Coach Blue
+  How It Works — 6 steps, three versions (menu, homepage, full page)
+  Landing pages — registry corrections + AppName fix + all landing pages
+
+WRITTEN, NOT YET RUN:
+  / amplify full build (including Reddit priority platform)
+  Prompt file: /mnt/user-data/outputs/amplify_complete_prompt.txt
+
+STILL TO BE BUILT (prompts not yet written):
+  / engage — client-embeddable widget completion
+  / promote — email dispatch via Resend completion
+  / respond — Facebook, Instagram, SMS multi-channel connections
+  / optimize — full SEO monitoring build
+  / amplify landing page
