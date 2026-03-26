@@ -1,6 +1,7 @@
 # TRIADBLUE — Claude Code Standing Instructions
 # This file is read automatically at the start of every session.
 # Every agent working on any TRIADBLUE repository must read this entirely before touching any file.
+# They must also read: .github/TRIADBLUE_CONTINUITY_BRIEFING.txt before starting any task.
 
 ## WHO YOU ARE WORKING FOR
 
