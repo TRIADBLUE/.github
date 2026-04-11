@@ -36,13 +36,14 @@ These are the only acceptable formats. Do not alter casing, spacing, or punctuat
   / elevate #E9B307 | / optimize #374151 | / publish #064A6C | / amplify #97ACCA
 
 / connect — standalone only: FREE (100 contacts) or $29/mo unlimited
+/ convert — Lead Capture and Conversion Tool: FREE (with / convert branding) or $59/year Premium (branding removed + full customization, conditional logic, multi-step, advanced field types)
 / Coach Blue — $99/mo standalone | $59/mo with one suite | FREE with both suites
 / assess — free Digital IQ Assessment tool
 / scan — website scanner
 
 Each app — $29/mo standalone
 
-Suites never cross-pollinate. Never bundle / connect. Never bundle / Coach Blue.
+Suites never cross-pollinate. Never bundle / connect. Never bundle / convert. Never bundle / Coach Blue.
 
 ## SUITE AND APP NAME FORMAT — LOCKED
 
@@ -55,6 +56,7 @@ Font: Archivo Semi Expanded.
   / anchor suite      — the Anchor Suite
   / Coach Blue        — the AI business coach
   / connect           — the CRM
+  / convert           — lead capture and conversion tool
   / promote           — email campaigns
   / engage            — live chat widget
   / respond           — unified inbox
@@ -94,6 +96,7 @@ App accent colors — confirmed from official lockup files:
   / optimize #374151
   / amplify  #97ACCA
   / connect  #008060
+  / convert  #8000FF
   / Coach Blue #0000FF
   / compass suite #F97316
   / anchor suite  #97ACCA
