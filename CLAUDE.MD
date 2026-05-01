@@ -14,6 +14,57 @@ GitHub org: TRIADBLUE
 Deployment: Replit
 LINKBlue GitHub proxy: https://linkblue-githubproxy.up.railway.app
 
+## DOCUMENT CONVENTIONS — EVERY PROMPT, RESPONSE, AND SEGUE
+
+Three document types are universal across all agents and all platforms.
+
+PROMPTS
+Initial scoped instructions written by web chat for execution by Claude
+Code. Naming format: "Prompt MM/DD/YYYY-N" where N is sequential FOREVER,
+never resetting per day or per repo. Numbers climb across all days. The
+date is just when the prompt was written; it does NOT reset N. If
+yesterday's last prompt was -7, today's first prompt is -8. Drafted-but-
+unfired ideas do NOT get a number until Dean approves them as the next
+thing to execute.
+
+RESPONSES
+Follow-up messages sent into a running session AFTER the prompt is fired.
+Naming format: "Response MM/DD/YYYY-Na" where N matches the parent prompt
+number and the letter (a, b, c, ...) increments per intervention. Example:
+parent prompt is 04/29/2026-3, the first follow-up is Response
+04/29/2026-3a, the second is 04/29/2026-3b.
+
+SEGUES
+Handoff document written by the agent ending a session, for the agent
+picking up next. Captures detailed context, mid-execution decisions, what
+was being finished, what is blocking, what is next. Naming format: "Segue
+from Prompt MM/DD/YYYY-N" where N is the LAST CLEANLY EXECUTED prompt in
+the session (highest-numbered prompt that committed, deployed, and
+verified). If a prompt was mid-flight at session end, the segue does NOT
+name it as the anchor — it names the last completed prompt and describes
+the mid-flight one in the body.
+
+Every agent must write a segue when their session ends, in the context
+of what they were actually doing.
+
+PLATFORM HEADER (REQUIRED ON EVERY PROMPT)
+Every prompt must include two header lines immediately after the prompt
+number, before any other content:
+
+  Executing for Platform: <Brand>
+  Executed through Platform: <Brand>
+
+"Executing for Platform" is what the work is FOR — the brand or product
+that the work serves.
+
+"Executed through Platform" is what the work runs THROUGH — the repo
+or infrastructure where the changes are committed and deployed.
+
+Multi-platform "for" uses an indented list. Usually both lines name the
+same brand. They differ when CDN, OGA, or cross-cutting work affects
+many platforms but executes through one. The header forces explicit
+scope before drafting.
+
 ## THE PLATFORMS — EXACT NAMES, EXACT CASING, NO EXCEPTIONS
 
     businessblueprint.io    — business growth platform — priority
@@ -117,11 +168,45 @@ Subtitle below app name in hero: app's own color, small spaced caps.
 / Coach Blue icon: always use face PNG (coachblue.png) — never a Lucide icon.
 All other apps: Lucide icons in rounded square with app accent color background.
 
+LUCIDE ICON EXCLUSIVITY (ECOSYSTEM-WIDE)
+Each Lucide icon assigned to an app in app-registry.ts is exclusive to
+that app. The same icon may not be used anywhere else on the same site
+(navigation, resource columns, footer, body content, decoration) and may
+not be used by any app or feature on any other ecosystem site (hostsblue,
+swipesblue, scansblue, builderblue2, triadblue, tbsys). Violations must
+be surfaced to Dean for resolution — do not auto-rename. Coach Blue is
+the established exception: face PNG (coachblue.png), never a Lucide icon.
+
 No "Coming Soon" anywhere.
 No placeholder content.
 No loyalty program references.
 No old suite names ever.
 No Stripe or NMI references in businessblueprint.io.
+
+## FILENAME NOMENCLATURE — ASSETS AND CDN
+
+Filenames in /Users/Shared/global assets/logo images and texts/<brand>/
+on Dean's Mac are authoritative. Do NOT rename, abbreviate, hyphenate,
+or "normalize" them when copying to the CDN, importing into a repo, or
+referencing them in code. Replit auto-renames (trailing numeric suffixes
+from drag-drop uploads) must be reverted before commit. CDN slot names
+should match Dean's descriptive naming, not design-industry shorthand.
+
+Canonical CDN naming convention (locked 2026-04-27):
+  logo-image.png                          — icon only
+  logo-image-and-logo-text-as-url.png     — lockup (icon + URL wordmark)
+  logo-text-as-url.png                    — wordmark only
+  ecosystem-lockup.png                    — TRIADBLUE-only multi-brand composite
+
+Example: use "logo-image-and-logo-text-as-url.png" not "logo-lockup.png".
+
+CDN server: cdn.triadblue.com (147.185.239.66, Kamatera).
+Brand folders: builderblue2, businessblueprint, coachblue, hostsblue,
+scansblue, swipesblue, tbsys, triadblue.
+
+Use scp not rsync for CDN pushes. scp updates file mtime to upload time
+on the destination, which keeps Last-Modified headers accurate for
+verification gates. rsync preserves source mtime and breaks them.
 
 ## SINGLE SOURCES OF TRUTH
 
@@ -167,6 +252,12 @@ If you are a sub-agent receiving a task:
     Read app-registry.ts before writing anything.
   - Do not delegate work to another agent without ensuring they read this file.
   - If you cannot confirm you have read this file, do the work yourself.
+
+These rules apply regardless of which document type you receive — a
+prompt, a response, or a segue. Whether you are starting a fresh task,
+joining a running session mid-flight, or picking up a session another
+agent ended, you have read CLAUDE.MD before you act. The document type
+does not change the obligation.
 
 ## VERIFICATION REQUIREMENT — EVERY TASK
 
