@@ -1,0 +1,147 @@
+name: DeepSeek Auditor - Reusable
+
+on:
+  workflow_call:
+    secrets:
+      CROSS_REPO_PAT:
+        required: true
+      DEEPSEEK_API_KEY:
+        required: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install jq
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq jq
+
+      - name: Get PR diff
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh pr diff "$PR_NUMBER" --repo "$REPO" > /tmp/pr.diff
+          echo "Diff size: $(wc -c < /tmp/pr.diff) bytes"
+
+      - name: Get PR metadata
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh pr view "$PR_NUMBER" --repo "$REPO" --json title,body,headRefName,baseRefName,author > /tmp/pr_meta.json
+          echo "PR title: $(jq -r '.title' /tmp/pr_meta.json)"
+
+      - name: Clone rulebook (private — uses CROSS_REPO_PAT)
+        env:
+          PAT: ${{ secrets.CROSS_REPO_PAT }}
+        run: |
+          git clone --depth 1 \
+            "https://x-access-token:${PAT}@github.com/TRIADBLUE/triadblue.rulebook.git" \
+            /tmp/rulebook
+
+      - name: Clone ai-archive (private — uses CROSS_REPO_PAT)
+        env:
+          PAT: ${{ secrets.CROSS_REPO_PAT }}
+        run: |
+          git clone --depth 1 \
+            "https://x-access-token:${PAT}@github.com/TRIADBLUE/ai-archive.git" \
+            /tmp/archive
+
+      - name: Load auditor system prompt from rulebook
+        run: |
+          if [ ! -f /tmp/rulebook/standards/PR_AUDITOR_PROMPT.md ]; then
+            echo "::error::PR_AUDITOR_PROMPT.md not found in rulebook standards/"
+            exit 1
+          fi
+          awk '/^## SYSTEM PROMPT/{flag=1; next} flag' /tmp/rulebook/standards/PR_AUDITOR_PROMPT.md > /tmp/system_prompt.txt
+          if [ ! -s /tmp/system_prompt.txt ]; then
+            echo "::error::Could not extract system prompt from PR_AUDITOR_PROMPT.md"
+            exit 1
+          fi
+          echo "System prompt size: $(wc -c < /tmp/system_prompt.txt) bytes"
+
+      - name: Build rulebook + archive context (recursive .md discovery)
+        run: |
+          find /tmp/rulebook /tmp/archive \
+            -name "*.md" -type f \
+            -not -path "*/node_modules/*" \
+            -not -path "*/.git/*" \
+            -exec echo "=== {} ===" \; \
+            -exec cat {} \; \
+            > /tmp/context_full.txt
+          head -c 200000 /tmp/context_full.txt > /tmp/context.txt
+          echo "Context size: $(wc -c < /tmp/context.txt) bytes (truncated from $(wc -c < /tmp/context_full.txt))"
+
+      - name: Call DeepSeek API
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          jq -n \
+            --rawfile system /tmp/system_prompt.txt \
+            --rawfile context /tmp/context.txt \
+            --rawfile diff /tmp/pr.diff \
+            --rawfile pr_meta /tmp/pr_meta.json \
+            '{
+              model: "deepseek-reasoner",
+              messages: [
+                {role: "system", content: $system},
+                {role: "user", content: ("# PR METADATA\n\n" + $pr_meta + "\n\n# RULEBOOK + AI ARCHIVE CONTEXT\n\n" + $context + "\n\n# PR DIFF\n\n" + $diff)}
+              ],
+              temperature: 0.2,
+              max_tokens: 4000
+            }' > /tmp/payload.json
+
+          HTTP_CODE=$(curl -s -o /tmp/response.json -w "%{http_code}" \
+            -X POST https://api.deepseek.com/v1/chat/completions \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
+            -d @/tmp/payload.json)
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "::error::DeepSeek API returned HTTP ${HTTP_CODE}"
+            cat /tmp/response.json
+            exit 1
+          fi
+
+          jq -r '.choices[0].message.content' /tmp/response.json > /tmp/review.md
+
+          if [ ! -s /tmp/review.md ] || [ "$(cat /tmp/review.md)" = "null" ]; then
+            echo "::error::DeepSeek returned empty review"
+            cat /tmp/response.json
+            exit 1
+          fi
+
+          echo "===== Review preview (first 80 lines) ====="
+          head -80 /tmp/review.md
+          echo "===== End preview ====="
+
+      - name: Determine verdict
+        id: verdict
+        run: |
+          if grep -q "^CLEAR —" /tmp/review.md; then
+            echo "verdict=approve" >> "$GITHUB_OUTPUT"
+            echo "Verdict: CLEAR (approve)"
+          else
+            echo "verdict=request-changes" >> "$GITHUB_OUTPUT"
+            echo "Verdict: BLOCKING (request changes)"
+          fi
+
+      - name: Post PR review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          VERDICT: ${{ steps.verdict.outputs.verdict }}
+        run: |
+          if [ "$VERDICT" = "approve" ]; then
+            gh pr review "$PR_NUMBER" --repo "$REPO" --body "$(cat /tmp/review.md)" --approve
+          else
+            gh pr review "$PR_NUMBER" --repo "$REPO" --body "$(cat /tmp/review.md)" --request-changes
+          fi
