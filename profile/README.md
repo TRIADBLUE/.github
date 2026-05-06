@@ -15,7 +15,7 @@ Our ecosystem is built around eight platforms, each focused on a distinct part o
 | **builderblue².com** | AI-powered vibe coding platform — standalone and integrated with hostsblue. |
 | **LINKBlue.systems** | Monitors website health across the ecosystem. |
 | **linksblue.network** | Agent-facing infrastructure (GitHub proxy, MCP server, AI conversation archive). |
-| **Console.Blue** | Internal operations interface. |
+| **triadblue.systems** | Internal operations interface. |
 
 ## businessblueprint apps
 
@@ -26,7 +26,7 @@ Two suites and three standalone tools:
 - **/ connect** — CRM (the data hub)
 - **/ convert** — lead capture and conversion
 - **/ Coach Blue** — AI business coach
-- **/ assess** — Digital IQ assessment (free)
+- **/ assess & prescribe** — Digital IQ assessment (free)
 - **/ scan** — website scanner
 
 ## Engineering principles
